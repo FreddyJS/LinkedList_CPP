@@ -1,4 +1,4 @@
-# DoublyLinkedList for C++ [![Codacy Badge](https://app.codacy.com/project/badge/Grade/19a87592705641d8b0581b300bae7872)](https://www.codacy.com/gh/FreddyJS/LinkedList/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FreddyJS/LinkedList&amp;utm_campaign=Badge_Grade)
+# DoublyLinkedList for C++ [![Codacy Badge](https://app.codacy.com/project/badge/Grade/1d470319ec56484fae5132086d97d27a)](https://www.codacy.com/gh/FreddyJS/LinkedList/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=FreddyJS/LinkedList&amp;utm_campaign=Badge_Grade)
 
 C++ library that provides all the necessary methods to handle a dynamic type list. Requires C++11.
 
