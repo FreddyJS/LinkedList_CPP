@@ -151,9 +151,11 @@ bool LinkedList<T>::clear() {
         
     }
 
-        if ( this->size == 0 ) {
-            return true;
-        }
+    if ( this->size == 0 ) {
+        return true;
+    } else {
+        return false;
+    }
 
 }
 
