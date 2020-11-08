@@ -155,8 +155,6 @@ bool LinkedList<T>::clear() {
             return true;
         }
 
-        return false;
-
 }
 
 
