@@ -1,7 +1,6 @@
 #include <LinkedList/LinkedList.h>
 #include <iostream>
 
-
 struct estructura {
     char data = 'a';
 };
