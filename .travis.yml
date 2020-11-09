@@ -24,4 +24,3 @@ after_success:
   - pip install gcovr
   - gcovr -r . --xml-pretty -o cobertura.xml
   - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r cobertura.xml
-  - coveralls --exclude lib --exclude tests --gcov-options '\-lp'
