@@ -63,7 +63,7 @@ T LinkedList<T>::getFirst() {
 // Returns the last item of the list
 template <class T>
 T LinkedList<T>::getLast() {
-    Item<T>* last = this->getLastP();
+    Item<T>* last = this->getLast();
     T data = last->getData();
     
     return data;
