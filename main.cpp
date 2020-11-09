@@ -6,6 +6,7 @@ struct estructura {
 };
 
 using namespace std;
+template class LinkedList<double>;
 
 
 LinkedList<int> intList() {
