@@ -32,17 +32,18 @@ Item<T>* LinkedList<T>::getItemPtr(size_t index) {
 template <class T>
 bool LinkedList<T>::addLast(T item) {
 
-    Item<T>* last = this->last;
-    if ( this->first == NULL ) {
-        this->first = new Item<T>(item);
+    if ( this->first == NULL && this->last == NULL ) {
+        Item<T>* t = new Item<T>(item); 
+        this->first = t;
+        this->last = t;
+
         this->size++;
 
-        this->last = this->first;
         return true;
     } else {
         Item<T>* t = new Item<T>(item);
         (this->last)->next = t;
-        t->previous = last;
+        t->previous = this->last;
 
         this->last = t;
         this->size++;
@@ -77,7 +78,7 @@ T LinkedList<T>::get(size_t index) {
     Item<T>* p = this->getItemPtr(index);
 
     if ( p == NULL ) {
-        std::cout << "-- [LinkedList.get(i)] ItemNotFound : Item[" << index << "]. Returned default data" << std::endl;
+        std::cout << "\nError: [LinkedList.get(i)] ItemNotFound : Item[" << index << "]. Returned default data\n" << std::endl;
         return T();
     } else {
         return p->getData();
@@ -149,14 +150,12 @@ bool LinkedList<T>::clear() {
         this->last = NULL;
         this->first = NULL;
         
+        if ( this->size == 0 ) {
+            return true;
+        }
     }
-
-    if ( this->size == 0 ) {
-        return true;
-    } else {
-        return false;
-    }
-
+    
+    return false;
 }
 
 
@@ -176,6 +175,8 @@ bool LinkedList<T>::shiftr() {
         (plast->previous)->next = NULL;
         plast->previous = NULL;
         plast->next = pfirst;
+        pfirst->previous = plast;
+        
         return true;
     } else {
         return false;
@@ -186,7 +187,7 @@ bool LinkedList<T>::shiftr() {
 
 template <class T>
 bool LinkedList<T>::shiftr(size_t shifts) {
-    for (int i = 0; i < shifts; i++) {
+    for (size_t i = 0; i < shifts; i++) {
         bool success = this->shiftr();
         if (!success) return false;
     }
@@ -221,7 +222,7 @@ bool LinkedList<T>::shiftl() {
 
 template <class T>
 bool LinkedList<T>::shiftl(size_t shifts) {
-    for (int i = 0; i < shifts; i++) {
+    for (size_t i = 0; i < shifts; i++) {
         bool success = this->shiftl();
         if (!success) return false;
     }

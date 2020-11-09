@@ -6,17 +6,20 @@ struct estructura {
 };
 
 using namespace std;
-template class LinkedList<double>;
+//template class LinkedList<double>;
 
 
 LinkedList<int> intList() {
     LinkedList<int> list;
-    int i = 10;
+    list.get(0);
+    list.clear();
 
-    list.addLast(i);
-    list.addLast(++i);
-    list.addLast(i+12);
-    list.addLast(i+4);
+    list.addLast(10);
+    list.addLast(11);
+    list.addLast(12);
+    list.addLast(13);
+    list.addLast(14);
+    list.addLast(15);
 
     return list;
 }
@@ -39,33 +42,76 @@ LinkedList<estructura> estructuraList() {
     i.data = 'e';
     list.addLast(i);
 
+    i.data = 'f';
+    list.addLast(i);
 
     return list;
 }
 
 
 int main(int argc, char* argv[]) {
-    cout << "- Creating LinkedList<int>" << endl;
     LinkedList<int> list = intList();
+    cout << "-- LinkedList<int> Size: " << list.size << ". List values:\n   [";
 
-    cout << "\nintListSize: " << list.size << ". List values:" << endl;
-    for (int i : list) {
-        cout << i << ", ";
+    for (size_t i = 0; i < list.size; i++) {
+        if (i == list.size-1) {
+            cout << list.get(i) << "]" << endl;;
+        } else {
+            cout << list.get(i) << ", ";
+        }
+    }
+    list.shiftr(1);
+    cout << "   [";
+    for (size_t i = 0; i < list.size; i++) {
+        if (i == list.size-1) {
+            cout << list.get(i) << "]" << endl;;
+        } else {
+            cout << list.get(i) << ", ";
+        }
+    }
+
+    list.get(20);
+    list.remove(20);
+    list.remove(0);
+    list.remove(list.size-1);
+    list.remove(1);
+    cout << "   [";
+    for (size_t i = 0; i < list.size; i++) {
+        if (i == list.size-1) {
+            cout << list.get(i) << "]" << endl;;
+        } else {
+            cout << list.get(i) << ", ";
+        }
     }
 
     list.clear();
-    cout << "\nintListSize after empty: " << list.size << ". List values:" << endl;
-    for (int i : list) {
-        cout << i << endl;
-    }
-    cout << "\n- Creating LinkedList<estructura>" << endl;
+    cout << "   LinkedList<int> Size After Clear: " << list.size << endl;
+    list.shiftl();
+    list.shiftr();
+    
     LinkedList<estructura> list2 = estructuraList();
 
-    cout << "\nestructuraListSize: " << list2.size << ". List values:" << endl;
-    for (estructura e : list2) {
-        cout << e.data << ", ";
+
+    cout << "\n-- LinkedList<estructura> Size: " << list2.size << ". List values:\n   [";
+    for (size_t x = 0; x < list2.size; x++) {
+        if (x == list2.size-1) {
+            cout << list2.get(x).data << "]" << endl;;
+        } else {
+            cout << list2.get(x).data << ", ";
+        }
     }
-    cout << endl;
+    cout << "   First: " << list2.getFirst().data << " - Last: " << list2.getLast().data << endl;
+
+    cout << "   [";
+    list2.shiftl(1);
+    for (size_t x = 0; x < list2.size; x++) {
+        if (x == list2.size-1) {
+            cout << list2.get(x).data << "]" << endl;;
+        } else {
+            cout << list2.get(x).data << ", ";
+        }
+    }
+    cout << "   First: " << list2.getFirst().data << " - Last: " << list2.getLast().data << endl;
 
     return 0;
 }

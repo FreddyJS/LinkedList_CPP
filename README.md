@@ -2,7 +2,6 @@
 
 C++ library that provides all the necessary methods to handle a dynamic type list. 
 
-
 ## How to use
 ### LinkedList Class
 ```c++ 
