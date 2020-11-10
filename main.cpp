@@ -33,12 +33,14 @@ int main(int argc, char* argv[]) {
     LinkedList<int> list;
     // Checking methods when the list is empty
     list.get(0);
-    cout << "[shiftr:" << list.shiftr(1) << ", shiftl:" << list.shiftl(1) << ", clear:" << list.clear() << ", remove:" << list.remove(0) << "]" << endl;
+    cout << "   [shiftr:" << list.shiftr(1) << ", shiftl:" << list.shiftl(1) << ", clear:" << list.clear() << ", remove:" << list.remove(0) << "]\n" << endl;
 
     list = intList();
     printIntList(list);
     
     list.shiftr(1);
+    printIntList(list);
+    list.shiftl(2);
     printIntList(list);
 
     list.get(20);
@@ -46,6 +48,8 @@ int main(int argc, char* argv[]) {
     list.remove(0);
     list.remove(list.size-1);
     list.remove(1);
+    list.getFirst();
+    list.getLast();
     
     printIntList(list);
 
