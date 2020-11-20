@@ -180,6 +180,8 @@ bool LinkedList<T>::clear() {
         this->first = NULL;
         
         if ( this->size == 0 ) {
+            this->current = NULL;
+            this->index = 0;
             return true;
         }
     }

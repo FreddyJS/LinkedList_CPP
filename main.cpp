@@ -49,6 +49,10 @@ int main(int argc, char* argv[]) {
     list->remove(1);
     list->getFirst();
     list->getLast();
+    list->get(1);
+    list->shiftr();
+    list->get(0);
+    list->shiftl();
     
     printIntList(list);
 
