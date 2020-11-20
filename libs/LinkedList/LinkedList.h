@@ -22,10 +22,13 @@ class LinkedList{
         Item<T>* first;
         Item<T>* last;
 
+        Item<T>* current;
+        size_t index = 0;
     public:
         LinkedList() {
             first = NULL;
             last = NULL;
+            current = NULL;
             size = 0;
         }
         ~LinkedList() { 

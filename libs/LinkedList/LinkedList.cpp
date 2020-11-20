@@ -2,24 +2,44 @@
 // NULL if the item on the position requested not exists
 template <class T>
 Item<T>* LinkedList<T>::getItemPtr(size_t index) {
-    Item<T>* p;
-    Item<T>* paux;
+    if (this->first == NULL) return NULL;
 
-    p = this->first;
+    // The list has at least one item
+    Item<T>* p = this->current;
+    size_t n = this->index;
 
-    if ( p == NULL ) {
-        return NULL;
-    } else {
-        size_t n = 0;
-        
-        if ( n == index ) { return p; }
+    Item<T>* paux = NULL;
+
+    if (p == NULL) {
+        p = this->first;
+    }
+
+    if (n == index) {
+        this->current = p;
+        this->index = n;
+        return p;
+    }
+
+    if (n < index) {
         while ( (paux = p->next) ) {
             n++;
             p = paux;
             if (n == index) {
+                this->current = p;
+                this->index = n;
                 return p;
             }
+        }
 
+    } else {
+        while ( (paux = p->previous) ) {
+            n--;
+            p = paux;
+            if (n == index) {
+                this->current = p;
+                this->index = n;
+                return p;
+            }
         }
     }
 
@@ -92,6 +112,15 @@ T LinkedList<T>::get(size_t index) {
 template <class T>
 bool LinkedList<T>::remove(size_t index) {
     Item<T>* p = this->getItemPtr(index);
+
+    if (p != NULL) {
+        this->current = p->previous;
+
+        if (this->index != 0) {
+            this->index--;
+        }
+    }
+
 
     if ( p == this->last && this->last != NULL) {
         (p->previous)->next = NULL;
@@ -176,6 +205,12 @@ bool LinkedList<T>::shiftr() {
         plast->previous = NULL;
         plast->next = pfirst;
         pfirst->previous = plast;
+
+        if (this->index == this->size-1) {
+            this->index = 0;
+        } else {
+            this->index++;
+        }
         
         return true;
     } else {
@@ -212,6 +247,13 @@ bool LinkedList<T>::shiftl() {
         plast->next = pfirst;
         pfirst->previous = plast;
         pfirst->next = NULL;
+
+
+        if (this->index == 0) {
+            this->index = this->size-1;
+        } else {
+            this->index--;
+        }
 
         return true;
     } else {
