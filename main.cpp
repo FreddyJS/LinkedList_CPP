@@ -4,7 +4,6 @@
 using namespace std;
 
 void intList(LinkedList<int>* list) {
-
     list->addLast(10);
     list->addLast(11);
     list->addLast(12);
@@ -22,11 +21,8 @@ void printIntList(LinkedList<int>* list) {
         } else {
             cout << list->get(i) << ", ";
         }
-    
     }
 }
-
-
 
 
 int main(int argc, char* argv[]) {
