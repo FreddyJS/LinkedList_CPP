@@ -12,6 +12,7 @@ Item<T>* LinkedList<T>::getItemPtr(size_t index) {
 
     if (p == NULL) {
         p = this->first;
+        n = 0;
     }
 
     if (n == index) {
@@ -126,7 +127,7 @@ bool LinkedList<T>::remove(size_t index) {
         (p->previous)->next = NULL;
         this->last = p->previous;
         
-        p->~Item<T>();
+        delete p;
         this->size--;
         
         return true;
@@ -134,7 +135,7 @@ bool LinkedList<T>::remove(size_t index) {
         (p->next)->previous = NULL;
         this->first = p->next;
 
-        p->~Item<T>();
+        delete p;
         this->size--;
         
         return true;
@@ -145,7 +146,7 @@ bool LinkedList<T>::remove(size_t index) {
             (p->next)->previous = p->previous;
             (p->previous)->next = p->next;
 
-            p->~Item<T>();
+            delete p;
             this->size--;
 
             return true;
@@ -166,14 +167,16 @@ bool LinkedList<T>::clear() {
 
     if ( p != NULL) {
         while ( (paux = p->previous) ) {
-            p->~Item<T>();
+            delete p;
             this->size--;
             p = paux;
 
             this->last = p;
         }
 
-        this->first->~Item<T>();
+
+        p = this->first;
+        delete p;
         this->size--;
         
         this->last = NULL;
@@ -208,10 +211,12 @@ bool LinkedList<T>::shiftr() {
         plast->next = pfirst;
         pfirst->previous = plast;
 
-        if (this->index == this->size-1) {
-            this->index = 0;
-        } else {
-            this->index++;
+        if (this->current != NULL) {
+            if (this->index == this->size-1) {
+                this->index = 0;
+            } else {
+                this->index++;
+            }
         }
         
         return true;
@@ -251,10 +256,12 @@ bool LinkedList<T>::shiftl() {
         pfirst->next = NULL;
 
 
-        if (this->index == 0) {
-            this->index = this->size-1;
-        } else {
-            this->index--;
+        if (this->current != NULL) {
+            if (this->index == 0) {
+                this->index = this->size-1;
+            } else {
+                this->index--;
+            }
         }
 
         return true;

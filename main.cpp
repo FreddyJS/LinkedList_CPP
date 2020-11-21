@@ -1,4 +1,4 @@
-#include <LinkedList/LinkedList.h>
+#include <LinkedList/LinkedList.hpp>
 #include <iostream>
 
 using namespace std;
@@ -22,8 +22,10 @@ void printIntList(LinkedList<int>* list) {
         } else {
             cout << list->get(i) << ", ";
         }
+    
     }
 }
+
 
 
 

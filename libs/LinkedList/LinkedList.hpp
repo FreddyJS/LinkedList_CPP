@@ -1,16 +1,14 @@
 #ifndef _LinkedList_H
 #define _LinkedList_H
 
+// ¡To use the LinkedList you must use dynamic allocation!
 // Include the Item class, those will be the nodes that stores the data
-#include "LinkedListItem.h"
+#include "LinkedListItem.hpp"
 // Include the Iterator class for the LinkedList, it allows to use the for_range with the list
-#include "LinkedListIterator.h"
-
+#include "LinkedListIterator.hpp"
 
 #include <stddef.h>
 #include <iostream>
-
-
 
 // LinkedList template class
 template <class T>
@@ -24,15 +22,17 @@ class LinkedList{
 
         Item<T>* current;
         size_t index = 0;
+        ~LinkedList() { 
+            clear();
+            delete this;
+        }
+
     public:
         LinkedList() {
             first = NULL;
             last = NULL;
             current = NULL;
             size = 0;
-        }
-        ~LinkedList() { 
-            clear();
         }
 
         size_t size;
