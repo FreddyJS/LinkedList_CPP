@@ -288,3 +288,14 @@ bool LinkedList<T>::shiftl(size_t shifts) {
 
     return true;
 }
+
+// Copy all the items from one list to the new list
+// Used on copy constructor
+//
+// Allocates new memory for every item on the new list
+template <class T>
+void LinkedList<T>::copyLinkedList(LinkedList<T>* list) {
+    for (size_t i = 0; i < list->size; i++) {
+        this->addLast(list->get(i));
+    }    
+}

@@ -19,26 +19,30 @@ class LinkedList{
     typedef T* iterator;
 
     private:
+        void copyLinkedList(LinkedList<T>* list);
+        
         LinkedListItem<T>* getItemPtr(size_t index);
-        LinkedListItem<T>* first;
-        LinkedListItem<T>* last;
+        LinkedListItem<T>* first = NULL;
+        LinkedListItem<T>* last = NULL;
 
-        LinkedListItem<T>* current;
+        LinkedListItem<T>* current = NULL;
         size_t index = 0;
+
         ~LinkedList() { 
             clear();
-            delete this;
         }
-
     public:
-        LinkedList() {
-            first = NULL;
-            last = NULL;
-            current = NULL;
-            size = 0;
-        }
 
-        size_t size;
+        LinkedList() { }
+
+        LinkedList(LinkedList<T>* list) {
+            this->copyLinkedList(list);
+
+            this->current = list->current;
+            this->index = list->index;
+        }
+        
+        size_t size = 0;
 
         bool addLast(T item);
         T getFirst();

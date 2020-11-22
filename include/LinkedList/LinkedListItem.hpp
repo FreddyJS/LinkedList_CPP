@@ -13,9 +13,9 @@ class LinkedListItem {
         LinkedListItem() {
             this->next = 0;
             this->previous = 0;
-            //this->data = data;
         }
 
+        ~LinkedListItem() { }
 
         T getData();
         T* getDataPtr();

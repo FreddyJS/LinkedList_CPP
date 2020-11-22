@@ -37,8 +37,12 @@ int main(int argc, char* argv[]) {
 
     list->shiftr(1);
     printIntList(list);
+
     list->shiftl(2);
     printIntList(list);
+
+    LinkedList<int>* list2 = new LinkedList<int>(list);
+    printIntList(list2);
 
     list->get(20);
     list->remove(20);
