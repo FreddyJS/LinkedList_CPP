@@ -29,7 +29,6 @@ void printIntList(LinkedList<int>* list) {
 int main(int argc, char* argv[]) {
     LinkedList<int>* list = new LinkedList<int>();
     // Checking methods when the list is empty
-    list->get(0);
     cout << "   [shiftr:" << list->shiftr(1) << ", shiftl:" << list->shiftl(1) << ", clear:" << list->clear() << ", remove:" << list->remove(0) << "]\n" << endl;
 
     intList(list);
@@ -43,9 +42,6 @@ int main(int argc, char* argv[]) {
 
     LinkedList<int>* list2 = new LinkedList<int>(list);
     printIntList(list2);
-
-    list->get(20);
-    list->remove(20);
 
     list->remove(0);
     list->remove(list->size-1);

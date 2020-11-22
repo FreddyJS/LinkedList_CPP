@@ -101,12 +101,14 @@ T LinkedList<T>::getLast() {
 //
 // Returns default data if no item found
 template <class T>
-T LinkedList<T>::get(size_t index) {
+T LinkedList<T>::get(size_t index){
     LinkedListItem<T>* p = this->getItemPtr(index);
 
     if ( p == NULL ) {
-        std::cout << "\nError: [LinkedList.get(i)] ItemNotFound : Item[" << index << "]. Returned default data\n" << std::endl;
-        return T();
+        //std::cout << "\nError: [LinkedList.get(i)] ItemNotFound : Item[" << index << "]. Returned default data\n" << std::endl;
+        //return T();
+        std::string msg = "LinkedListException: Item not found! Operation: get(" + std::to_string(index) + ")";
+        throw LinkedListException(msg);
     } else {
         return p->getData();
     }    

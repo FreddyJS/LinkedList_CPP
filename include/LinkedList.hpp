@@ -1,14 +1,18 @@
 #ifndef _LinkedList_H
 #define _LinkedList_H
 
+#include <stddef.h>
+#include <iostream>
+#include <exception>
+
 // ¡To use the LinkedList you must use dynamic allocation!
 // Include the Item class, those will be the nodes that stores the data
 #include <LinkedList/LinkedListItem.hpp>
 // Include the Iterator class for the LinkedList, it allows to use for_range loops with the list
 #include <LinkedList/LinkedListIterator.hpp>
 
-#include <stddef.h>
-#include <iostream>
+#include <LinkedList/LinkedListException.hpp>
+
 
 // LinkedList class, doubly linked list implementation
 // ¡Must use with dynamic allocation!
