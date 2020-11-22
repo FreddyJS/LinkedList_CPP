@@ -1,4 +1,4 @@
-#include <LinkedList/LinkedList.hpp>
+#include <LinkedList.hpp>
 #include <iostream>
 
 using namespace std;
@@ -11,6 +11,7 @@ void intList(LinkedList<int>* list) {
     list->addLast(14);
     list->addLast(15);
 }
+
 
 void printIntList(LinkedList<int>* list) {
     cout << "-- LinkedList<int> Size: " << list->size << ". List values:\n   [";
@@ -53,6 +54,11 @@ int main(int argc, char* argv[]) {
     list->shiftl();
     
     printIntList(list);
+    cout << "    ";
+    for (int val: *list) {
+        cout << val << "  ";
+    }
+    cout << endl;
 
     list->clear();
     cout << "   LinkedList<int> Size After Clear: " << list->size << endl;

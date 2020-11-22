@@ -2,40 +2,47 @@
 #define _LinkedListItem_H
 
 template <class T>
-class Item {
+class LinkedListItem {
     T data;
 
     public:
 
-        Item<T>* next;
-        Item<T>* previous;
+        LinkedListItem<T>* next;
+        LinkedListItem<T>* previous;
 
-        Item(T data) {
-            next = 0;
-            previous = 0;
-            this->data = data;
+        LinkedListItem() {
+            this->next = 0;
+            this->previous = 0;
+            //this->data = data;
         }
 
 
         T getData();
         T* getDataPtr();
+        void setData(T data);
 
 };
 
-// Returns the data stored by the user
+// Returns the data stored on the Item
 template <class T>
-T Item<T>::getData() {
+T LinkedListItem<T>::getData() {
     T data = this->data;
 
     return data;
 }
 
-// Returns de pointer to the data stored by the user
+// Returns de pointer to the data stored on the Item
 template <class T>
-T* Item<T>::getDataPtr() {
+T* LinkedListItem<T>::getDataPtr() {
     T* data = &(this->data);
 
     return data;
+}
+
+// Sets the data stored on the Item
+template <class T>
+void LinkedListItem<T>::setData(T data) {
+    this->data = data;
 }
 
 #endif

@@ -3,24 +3,27 @@
 
 // ¡To use the LinkedList you must use dynamic allocation!
 // Include the Item class, those will be the nodes that stores the data
-#include "LinkedListItem.hpp"
-// Include the Iterator class for the LinkedList, it allows to use the for_range with the list
-#include "LinkedListIterator.hpp"
+#include <LinkedList/LinkedListItem.hpp>
+// Include the Iterator class for the LinkedList, it allows to use for_range loops with the list
+#include <LinkedList/LinkedListIterator.hpp>
 
 #include <stddef.h>
 #include <iostream>
 
-// LinkedList template class
+// LinkedList class, doubly linked list implementation
+// ¡Must use with dynamic allocation!
+// 
+// LinkedList<int> list = new LinkedList<int>();
 template <class T>
 class LinkedList{
     typedef T* iterator;
 
     private:
-        Item<T>* getItemPtr(size_t index);
-        Item<T>* first;
-        Item<T>* last;
+        LinkedListItem<T>* getItemPtr(size_t index);
+        LinkedListItem<T>* first;
+        LinkedListItem<T>* last;
 
-        Item<T>* current;
+        LinkedListItem<T>* current;
         size_t index = 0;
         ~LinkedList() { 
             clear();
@@ -51,12 +54,14 @@ class LinkedList{
         bool shiftl();
         bool shiftl(size_t shifts);
 
-        Iterator<T> begin() { return Iterator<T>(first);}
-        Iterator<T> end() { return NULL;}
+        LinkedListIterator<T> begin() {
+            return LinkedListIterator<T>(first);
+        }
+        LinkedListIterator<T> end() { return NULL;}
 
 };
 
 // Include all the definitions of the functions for the LinkedList class
-#include "LinkedList.cpp"
+#include <LinkedList/LinkedList.cpp>
 
 #endif
