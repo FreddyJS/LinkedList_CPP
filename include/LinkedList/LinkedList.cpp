@@ -328,3 +328,27 @@ void LinkedList<T>::copyLinkedList(LinkedList<T>* list) {
         this->addLast(list->get(i));
     }    
 }
+
+template <class T>
+void LinkedList<T>::operator delete(void* ptr) {
+    LinkedList<T>* list = (LinkedList<T>*) ptr;
+    list->clear();
+    free(ptr);
+}
+
+template <class T>
+void LinkedList<T>::destruct(LinkedList<T>* list) {
+    list->clear();
+    free(list);
+}
+
+template <class T>
+void* LinkedList<T>::operator new(size_t size) {
+    //ptr->clear;
+    return malloc(size);
+}
+
+template <class T>
+static void destructLinkedList(LinkedList<T>* list) {
+            delete list;
+}

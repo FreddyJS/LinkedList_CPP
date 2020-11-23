@@ -69,14 +69,15 @@ class LinkedList{
         }
         LinkedListIterator<T> end() { return NULL; }
 
+        void* operator new(size_t size);
+        void operator delete(void* list);
+
+        static void destruct(LinkedList<T>* list);
+        
         template <class type>
         friend void destructLinkedList(LinkedList<type>* list);
-};
 
-template <class type>
-void destructLinkedList(LinkedList<type>* list) {
-    delete list;
-}
+};
 
 // Include all the definitions of the functions for the LinkedList class
 #include <LinkedList/LinkedList.cpp>
