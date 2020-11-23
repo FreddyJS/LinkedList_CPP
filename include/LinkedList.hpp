@@ -13,7 +13,6 @@
 
 #include <LinkedList/LinkedListException.hpp>
 
-
 // LinkedList class, doubly linked list implementation
 // ¡Must use with dynamic allocation!
 // 
@@ -32,14 +31,14 @@ class LinkedList{
         LinkedListItem<T>* current = NULL;
         size_t index = 0;
 
-        ~LinkedList() { 
+        ~LinkedList<T>() { 
             clear();
         }
     public:
 
-        LinkedList() { }
+        LinkedList<T>() {  }
 
-        LinkedList(LinkedList<T>* list) {
+        LinkedList<T>(LinkedList<T>* list) {
             this->copyLinkedList(list);
 
             this->current = list->current;
@@ -48,10 +47,13 @@ class LinkedList{
         
         size_t size = 0;
 
-        bool addLast(T item);
+        bool addLast(T data);
         T getFirst();
         T getLast();
         T get(size_t index);
+
+        void set(size_t index, T data);
+
 
         bool remove(size_t index);
         bool clear();
@@ -65,9 +67,16 @@ class LinkedList{
         LinkedListIterator<T> begin() {
             return LinkedListIterator<T>(first);
         }
-        LinkedListIterator<T> end() { return NULL;}
+        LinkedListIterator<T> end() { return NULL; }
 
+        template <class type>
+        friend void destructLinkedList(LinkedList<type>* list);
 };
+
+template <class type>
+void destructLinkedList(LinkedList<type>* list) {
+    delete list;
+}
 
 // Include all the definitions of the functions for the LinkedList class
 #include <LinkedList/LinkedList.cpp>

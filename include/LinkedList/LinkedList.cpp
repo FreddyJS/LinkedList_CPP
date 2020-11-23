@@ -8,9 +8,9 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
 
     // The list has at least one item
     LinkedListItem<T>* p = this->current;
+    LinkedListItem<T>* paux = NULL;
     size_t n = this->index;
 
-    LinkedListItem<T>* paux = NULL;
 
     if (p == NULL) {
         p = this->first;
@@ -53,24 +53,24 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
 // Adds item to the back of the list
 // Returns true if success
 template <class T>
-bool LinkedList<T>::addLast(T item) {
-
+bool LinkedList<T>::addLast(T data) {
+    LinkedListItem<T>* item;
     if ( this->first == NULL && this->last == NULL ) {
-        LinkedListItem<T>* t = new LinkedListItem<T>(); 
-        t->setData(item);
-        this->first = t;
-        this->last = t;
+        item = new LinkedListItem<T>(); 
+        item->setData(data);
+        this->first = item;
+        this->last = item;
 
         this->size++;
 
         return true;
     } else {
-        LinkedListItem<T>* t = new LinkedListItem<T>();
-        t->setData(item);
-        (this->last)->next = t;
-        t->previous = this->last;
+        item = new LinkedListItem<T>();
+        item->setData(data);
+        (this->last)->next = item;
+        item->previous = this->last;
 
-        this->last = t;
+        this->last = item;
         this->size++;
 
         return true;
@@ -83,23 +83,32 @@ bool LinkedList<T>::addLast(T item) {
 // Returns the first item of the list
 template <class T>
 T LinkedList<T>::getFirst() {
-    return first->getData();
+    if (this->first != NULL) {
+        T data = this->first->getData();
+        return data;
+    } else {
+        std::string msg = "LinkedListException: Item not found! Operation: getLast()";
+        throw LinkedListException(msg);
+    }
 }
 
 // Returns the last item of the list
 template <class T>
 T LinkedList<T>::getLast() {
-    LinkedListItem<T>* last = this->last;
-    T data = last->getData();
-    
-    return data;
+    if (this->last != NULL) {
+        T data = this->last->getData();
+        return data;
+    } else {
+        std::string msg = "LinkedListException: Item not found! Operation: getLast()";
+        throw LinkedListException(msg);
+    }
 }
 
 
 // Returns the requested item on the position [index]
 // Range from 0 to the size of the list -1
 //
-// Returns default data if no item found
+// Throws exception if the item not exists
 template <class T>
 T LinkedList<T>::get(size_t index){
     LinkedListItem<T>* p = this->getItemPtr(index);
@@ -111,6 +120,25 @@ T LinkedList<T>::get(size_t index){
         throw LinkedListException(msg);
     } else {
         return p->getData();
+    }    
+
+}
+
+// Returns the requested pointer to the item on the position [index]
+// Range from 0 to the size of the list -1
+//
+// Throws exception if the item not exists
+template <class T>
+void LinkedList<T>::set(size_t index, T data){
+    LinkedListItem<T>* p = this->getItemPtr(index);
+
+    if ( p == NULL ) {
+        //std::cout << "\nError: [LinkedList.get(i)] ItemNotFound : Item[" << index << "]. Returned default data\n" << std::endl;
+        //return T();
+        std::string msg = "LinkedListException: Item not found! Operation: set(" + std::to_string(index) +")";
+        throw LinkedListException(msg);
+    } else {
+        p->setData(data);
     }    
 
 }
@@ -183,7 +211,6 @@ bool LinkedList<T>::clear() {
 
             this->last = p;
         }
-
 
         p = this->first;
         delete p;

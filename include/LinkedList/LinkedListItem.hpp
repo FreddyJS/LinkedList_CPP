@@ -6,7 +6,6 @@ class LinkedListItem {
     T data;
 
     public:
-
         LinkedListItem<T>* next;
         LinkedListItem<T>* previous;
 
@@ -26,17 +25,13 @@ class LinkedListItem {
 // Returns the data stored on the Item
 template <class T>
 T LinkedListItem<T>::getData() {
-    T data = this->data;
-
-    return data;
+    return this->data;
 }
 
 // Returns de pointer to the data stored on the Item
 template <class T>
 T* LinkedListItem<T>::getDataPtr() {
-    T* data = &(this->data);
-
-    return data;
+    return &(this->data);
 }
 
 // Sets the data stored on the Item

@@ -12,7 +12,6 @@ void intList(LinkedList<int>* list) {
     list->addLast(15);
 }
 
-
 void printIntList(LinkedList<int>* list) {
     cout << "-- LinkedList<int> Size: " << list->size << ". List values:\n   [";
 
@@ -25,13 +24,25 @@ void printIntList(LinkedList<int>* list) {
     }
 }
 
+void intList(LinkedList<int> list) {
+    list.addLast(10);
+    list.addLast(11);
+    list.addLast(12);
+    list.addLast(13);
+    list.addLast(14);
+    list.addLast(15);
+
+    list.shiftl();
+}
 
 int main(int argc, char* argv[]) {
     LinkedList<int>* list = new LinkedList<int>();
+
     // Checking methods when the list is empty
     cout << "   [shiftr:" << list->shiftr(1) << ", shiftl:" << list->shiftl(1) << ", clear:" << list->clear() << ", remove:" << list->remove(0) << "]\n" << endl;
 
     intList(list);
+
     printIntList(list);
 
     list->shiftr(1);
@@ -52,6 +63,8 @@ int main(int argc, char* argv[]) {
     list->shiftr();
     list->get(0);
     list->shiftl();
+
+    list->set(0, 100);
     
     printIntList(list);
     cout << "    ";
@@ -63,5 +76,9 @@ int main(int argc, char* argv[]) {
     list->clear();
     cout << "   LinkedList<int> Size After Clear: " << list->size << endl;
     
+    destructLinkedList(list2);
+    destructLinkedList(list);
+
     return 0;
 }
+
