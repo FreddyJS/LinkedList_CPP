@@ -14,6 +14,12 @@ class LinkedListItem {
             this->previous = 0;
         }
 
+        LinkedListItem(T data) {
+            this->next = 0;
+            this->previous = 0;
+            this->data = data;
+        }
+
         ~LinkedListItem() { }
 
         T getData();

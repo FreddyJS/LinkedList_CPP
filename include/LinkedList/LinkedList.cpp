@@ -11,7 +11,6 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
     LinkedListItem<T>* paux = NULL;
     size_t n = this->index;
 
-
     if (p == NULL) {
         p = this->first;
         n = 0;
@@ -50,13 +49,13 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
 }
 
 
-// Adds item to the back of the list
+// Adds an item to the back of the list
 // Returns true if success
 template <class T>
 bool LinkedList<T>::addLast(T data) {
     LinkedListItem<T>* item;
     if ( this->first == NULL && this->last == NULL ) {
-        item = new LinkedListItem<T>(); 
+        item = new LinkedListItem<T>(data);
         item->setData(data);
         this->first = item;
         this->last = item;
@@ -65,8 +64,7 @@ bool LinkedList<T>::addLast(T data) {
 
         return true;
     } else {
-        item = new LinkedListItem<T>();
-        item->setData(data);
+        item = new LinkedListItem<T>(data);
         (this->last)->next = item;
         item->previous = this->last;
 
@@ -114,8 +112,6 @@ T LinkedList<T>::get(size_t index){
     LinkedListItem<T>* p = this->getItemPtr(index);
 
     if ( p == NULL ) {
-        //std::cout << "\nError: [LinkedList.get(i)] ItemNotFound : Item[" << index << "]. Returned default data\n" << std::endl;
-        //return T();
         std::string msg = "LinkedListException: Item not found! Operation: get(" + std::to_string(index) + ")";
         throw LinkedListException(msg);
     } else {
@@ -133,8 +129,6 @@ void LinkedList<T>::set(size_t index, T data){
     LinkedListItem<T>* p = this->getItemPtr(index);
 
     if ( p == NULL ) {
-        //std::cout << "\nError: [LinkedList.get(i)] ItemNotFound : Item[" << index << "]. Returned default data\n" << std::endl;
-        //return T();
         std::string msg = "LinkedListException: Item not found! Operation: set(" + std::to_string(index) +")";
         throw LinkedListException(msg);
     } else {
@@ -157,7 +151,6 @@ bool LinkedList<T>::remove(size_t index) {
             this->index--;
         }
     }
-
 
     if ( p == this->last && this->last != NULL) {
         (p->previous)->next = NULL;
@@ -197,7 +190,7 @@ bool LinkedList<T>::remove(size_t index) {
 // Clears the list by calling the destructor of any Item stored
 // Returns true if success
 //
-// automatic deletion when the list is destroyed
+// Automatic deletion when the list is destroyed
 template <class T>
 bool LinkedList<T>::clear() {
     LinkedListItem<T>* p = this->last;
@@ -329,6 +322,13 @@ void LinkedList<T>::copyLinkedList(LinkedList<T>* list) {
     }    
 }
 
+// Overloadingoperator new
+template <class T>
+void* LinkedList<T>::operator new(size_t size) {
+    return malloc(size);
+}
+
+// Overloading operator delete
 template <class T>
 void LinkedList<T>::operator delete(void* ptr) {
     LinkedList<T>* list = (LinkedList<T>*) ptr;
@@ -336,19 +336,14 @@ void LinkedList<T>::operator delete(void* ptr) {
     free(ptr);
 }
 
+// Destruct public method
 template <class T>
-void LinkedList<T>::destruct(LinkedList<T>* list) {
-    list->clear();
-    free(list);
+void LinkedList<T>::destruct() {
+    delete this;
 }
 
-template <class T>
-void* LinkedList<T>::operator new(size_t size) {
-    //ptr->clear;
-    return malloc(size);
-}
-
+// Friend method to destruct the lists
 template <class T>
 static void destructLinkedList(LinkedList<T>* list) {
-            delete list;
+    delete list;
 }

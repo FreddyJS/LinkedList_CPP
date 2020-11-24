@@ -10,12 +10,12 @@
 #include <LinkedList/LinkedListItem.hpp>
 // Include the Iterator class for the LinkedList, it allows to use for_range loops with the list
 #include <LinkedList/LinkedListIterator.hpp>
-
+// Include the Exception class for the LinkedList, it allows to use custom exception messages
 #include <LinkedList/LinkedListException.hpp>
 
 // LinkedList class, doubly linked list implementation
 // ¡Must use with dynamic allocation!
-// 
+//
 // LinkedList<int> list = new LinkedList<int>();
 template <class T>
 class LinkedList{
@@ -31,14 +31,14 @@ class LinkedList{
         LinkedListItem<T>* current = NULL;
         size_t index = 0;
 
-        ~LinkedList<T>() { 
+        ~LinkedList() { 
             clear();
         }
     public:
 
-        LinkedList<T>() {  }
+        LinkedList() {  }
 
-        LinkedList<T>(LinkedList<T>* list) {
+        LinkedList(LinkedList<T>* list) {
             this->copyLinkedList(list);
 
             this->current = list->current;
@@ -71,8 +71,8 @@ class LinkedList{
 
         void* operator new(size_t size);
         void operator delete(void* list);
+        void destruct();
 
-        static void destruct(LinkedList<T>* list);
         
         template <class type>
         friend void destructLinkedList(LinkedList<type>* list);
