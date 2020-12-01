@@ -16,14 +16,15 @@ private:
 public:
     size_t size;
     
-    bool addLast(T data);
+    void addLast(T data);
+    
     T getFirst();
     T getLast();
     T get(size_t index);
     void set(size_t index, T data); // Replaces the data of the item
     
     bool remove(size_t index); // Deallocates the memory of the removed item
-    bool clear(); // Deallocates the memory of every item of the list
+    void clear(); // Deallocates the memory of every item of the list
     
     bool shiftr();
     bool shiftr(size_t shifts);
