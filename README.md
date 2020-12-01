@@ -20,7 +20,7 @@ public:
     T getFirst();
     T getLast();
     T get(size_t index);
-    void set(size_t index, T data);
+    void set(size_t index, T data); // Replaces the data of the item
     
     bool remove(size_t index); // Deallocates the memory of the removed item
     bool clear(); // Deallocates the memory of every item of the list
@@ -60,6 +60,9 @@ bool addLast(T data); // Receives the data to store, returns true if success
 
 LinkedList<int>* intList = new LinkedList<int>();
 intList->addLast(10);
+
+// Now we can also change the saved data
+intList->set(0, 20);
 ```
 ### 3. Getting elements
 ```c++

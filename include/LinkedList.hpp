@@ -16,7 +16,7 @@
 // LinkedList class, doubly linked list implementation
 // ¡Must use with dynamic allocation!
 //
-// LinkedList<int> list = new LinkedList<int>();
+// i.e. LinkedList<int> list = new LinkedList<int>();
 template <class T>
 class LinkedList{
     typedef T* iterator;
@@ -35,9 +35,10 @@ class LinkedList{
             clear();
         }
     public:
-
+        // Empty constructor
         LinkedList() {  }
 
+        // Copy constructor from another list of the same type of data
         LinkedList(LinkedList<T>* list) {
             this->copyLinkedList(list);
 
@@ -47,16 +48,15 @@ class LinkedList{
         
         size_t size = 0;
 
-        bool addLast(T data);
+        void addLast(T data);
         T getFirst();
         T getLast();
         T get(size_t index);
 
         void set(size_t index, T data);
 
-
         bool remove(size_t index);
-        bool clear();
+        void clear();
 
         bool shiftr();
         bool shiftr(size_t shifts);
@@ -64,19 +64,15 @@ class LinkedList{
         bool shiftl();
         bool shiftl(size_t shifts);
 
-        LinkedListIterator<T> begin() {
-            return LinkedListIterator<T>(first);
-        }
+        LinkedListIterator<T> begin() { return LinkedListIterator<T>(first); }
         LinkedListIterator<T> end() { return NULL; }
 
         void* operator new(size_t size);
         void operator delete(void* list);
         void destruct();
-
         
         template <class type>
         friend void destructLinkedList(LinkedList<type>* list);
-
 };
 
 // Include all the definitions of the functions for the LinkedList class

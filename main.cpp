@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     LinkedList<int>* list = new LinkedList<int>();
 
     // Checking methods when the list is empty
-    cout << "   [shiftr:" << list->shiftr(1) << ", shiftl:" << list->shiftl(1) << ", clear:" << list->clear() << ", remove:" << list->remove(0) << "]\n" << endl;
+    cout << "   [shiftr:" << list->shiftr(1) << ", shiftl:" << list->shiftl(1) << ", remove:" << list->remove(0) << "]\n" << endl;
 
     intList(list);
     printIntList(list);
