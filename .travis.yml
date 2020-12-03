@@ -1,5 +1,5 @@
 language: cpp
-script: ./testcov.sh
+script: ./test.sh
 os: linux
 compiler:
   - gcc
@@ -12,12 +12,9 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
-            - g++-7
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+            - g++
 
 before_install:
-    - eval "${MATRIX_EVAL}"
     - pip install --user cpp-coveralls
 
 after_success:

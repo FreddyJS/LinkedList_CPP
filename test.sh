@@ -1,3 +1,4 @@
 #!/bin/bash
 make
-./main
+./bin/listExample
+gcovr

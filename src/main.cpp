@@ -28,7 +28,8 @@ int main(int argc, char* argv[]) {
     LinkedList<int>* list = new LinkedList<int>();
 
     // Checking methods when the list is empty
-    cout << "   [shiftr:" << list->shiftr(1) << ", shiftl:" << list->shiftl(1) << ", remove:" << list->remove(0) << "]\n" << endl;
+    cout << "\033[1;31m\n---- Starting the list tests! ----\n\033[0m\n";
+    cout << "-- [shiftr:" << list->shiftr(1) << ", shiftl:" << list->shiftl(1) << ", remove:" << list->remove(0) << "]\n" << endl;
 
     intList(list);
     printIntList(list);
@@ -62,10 +63,11 @@ int main(int argc, char* argv[]) {
     cout << endl;
 
     list->clear();
-    cout << "   LinkedList<int> Size After Clear: " << list->size << endl;
+    cout << "-- LinkedList<int> Size After Clear: " << list->size << endl;
     
     list->destruct();
     destructLinkedList(list2);
+    cout << "\033[1;31m\n---- Finished the list tests! ----\n\n\033[0m\n";
 
     return 0;
 }
