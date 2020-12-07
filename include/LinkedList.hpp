@@ -16,7 +16,7 @@
 // LinkedList class, doubly linked list implementation
 // ¡Must use with dynamic allocation!
 //
-// i.e. LinkedList<int> list = new LinkedList<int>();
+// i.e. LinkedList<int>* list = new LinkedList<int>();
 template <class T>
 class LinkedList{
     typedef T* iterator;
@@ -42,8 +42,8 @@ class LinkedList{
         LinkedList(LinkedList<T>* list) {
             this->copyLinkedList(list);
 
-            this->current = list->current;
-            this->index = list->index;
+            this->current = NULL;
+            this->index = 0;
         }
         
         size_t size = 0;

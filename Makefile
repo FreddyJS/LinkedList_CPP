@@ -17,7 +17,6 @@ COVFLAGS := --coverage -fno-inline -fno-inline-small-functions -fno-default-inli
 LDFLAGS := 
 LDLIBS := 
 
-.PHONY: all clean
 
 all: $(EXE)
 
@@ -34,3 +33,5 @@ clean:
 	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
 
 -include $(OBJ:.o=.d)
+
+.PHONY: all clean

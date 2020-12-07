@@ -4,3 +4,7 @@
 bin/
 
 obj/
+
+cobertura.xml
+
+debug.sh
