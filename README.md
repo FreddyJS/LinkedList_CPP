@@ -107,10 +107,10 @@ for (int value : intList) {
 ```
 ### 6. Deleting the list
 ```c++
+// Just when using dynamic allocation
 LinkedList<int>* intList = new LinkedList<int>();
 intList->addLast(10);
 
-// To prevent from non-dynamical allocation the destructor of the LinkedList Class is private
 // The list can be deallocated by two ways
 intList->destruct();
 destructLinkedList(intList);
