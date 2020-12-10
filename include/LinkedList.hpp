@@ -5,7 +5,6 @@
 #include <iostream>
 #include <exception>
 
-// ¡To use the LinkedList you must use dynamic allocation!
 // Include the Item class, those will be the nodes that stores the data
 #include <LinkedList/LinkedListItem.hpp>
 // Include the Iterator class for the LinkedList, it allows to use for_range loops with the list
@@ -14,9 +13,11 @@
 #include <LinkedList/LinkedListException.hpp>
 
 // LinkedList class, doubly linked list implementation
-// ¡Must use with dynamic allocation!
+// If you use static allocation please be sure to return the list if its modified
+// \@type: the type of the data to store
 //
-// i.e. LinkedList<int>* list = new LinkedList<int>();
+// LinkedList<type> list;
+// LinkedList<type>* list = new LinkedList<int>();
 template <class T>
 class LinkedList{
     typedef T* iterator;
@@ -31,9 +32,6 @@ class LinkedList{
         LinkedListItem<T>* current = NULL;
         size_t index = 0;
 
-        ~LinkedList() { 
-            clear();
-        }
     public:
         // Empty constructor
         LinkedList() {  }
@@ -46,6 +44,10 @@ class LinkedList{
             this->index = 0;
         }
         
+        ~LinkedList() { 
+            clear();
+        }
+
         size_t size = 0;
 
         void addLast(T data);

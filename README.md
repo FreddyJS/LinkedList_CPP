@@ -1,9 +1,7 @@
 # DoublyLinkedList for C++
 C ++ library that provides all the necessary methods to handle a list of any type of data. It is implemented by two classes, the "manager" class (LinkedList) and the node class (LinkedListItem).
 
-**The LinkedList needs to be created with dynamic allocation in order to work properly**. It is because if the first or last node of the list changes we need to change the first or last pointer of the LinkedList or something will break. 
-
-In order to prevent to use static allocation the destructor of the LinkedList Class is private. To deallocate the memory of the list you can use the public method destruct or the method destructLinkedList. The items of the list will be removed automatically.
+**When using static allocation remember to return the list if it's modified when passed by value**. It is because if the first or last node of the list changes we need to change the first or last pointer of the LinkedList class. 
 
 ## LinkedList Class
 ```c++
@@ -48,12 +46,12 @@ public:
 
 ### 1. Creating a list
 ```c++
-// The list MUST be created with dynamic allocation
+// Creating a list with dynamic allocation
 LinkedList<int>* intList = new LinkedList<int>();
 LinkedList<bool>* boolList = new LinkedList<bool>();
 
-// You can also use your own structures!
-LinkedList<myStruct>* structList = new LinkedList<myStruct>();
+// Creating a list with static allocation
+LinkedList<int> intList;
 ```
 ### 2. Adding elements
 ```c++
@@ -97,6 +95,12 @@ for (int i = 0; i < intList->size; i++) {
 
 // You can use also a for range based, with C++11 or greater
 for (int value : *intList) {
+    cout << "Integer value: " << value << endl;
+}
+
+// If using static allocation
+LinkedList<int> intList;
+for (int value : intList) {
     cout << "Integer value: " << value << endl;
 }
    
