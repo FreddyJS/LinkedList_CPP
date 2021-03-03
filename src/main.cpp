@@ -65,8 +65,8 @@ int main(int argc, char* argv[]) {
     list->clear();
     cout << "-- LinkedList<int> Size After Clear: " << list->size << endl;
     
-    list->destruct();
-    destructLinkedList(list2);
+    delete(list);
+    delete(list2);
     cout << "\033[1;31m\n---- Finished the list tests! ----\n\n\033[0m\n";
 
     return 0;

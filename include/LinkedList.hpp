@@ -71,10 +71,6 @@ class LinkedList{
 
         void* operator new(size_t size);
         void operator delete(void* list);
-        void destruct();
-        
-        template <class type>
-        friend void destructLinkedList(LinkedList<type>* list);
 };
 
 // Include all the definitions of the functions for the LinkedList class

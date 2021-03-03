@@ -28,9 +28,6 @@ public:
     bool shiftr(size_t shifts);
     bool shiftl();
     bool shiftl(size_t shifts);
-            
-    void destruct();
-    friend void destructLinkedList(LinkedList<type>* list);
 ```
 
 ## LinkedListItem Class
@@ -111,9 +108,7 @@ for (int value : intList) {
 LinkedList<int>* intList = new LinkedList<int>();
 intList->addLast(10);
 
-// The list can be deallocated by two ways
-intList->destruct();
-destructLinkedList(intList);
+delete(intList);
 ```
 ## More operations
 - ###  Cyclic Shift

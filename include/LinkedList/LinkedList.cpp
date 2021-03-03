@@ -353,15 +353,3 @@ void LinkedList<T>::operator delete(void* ptr) {
     list->clear();
     free(ptr);
 }
-
-// Destruct public method
-template <class T>
-void LinkedList<T>::destruct() {
-    delete this;
-}
-
-// Friend method to destruct the lists
-template <class T>
-static void destructLinkedList(LinkedList<T>* list) {
-    delete list;
-}
