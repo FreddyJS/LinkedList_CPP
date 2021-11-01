@@ -4,8 +4,5 @@ set(CMAKE_CXX_STANDARD 11)
 # Set the project name
 project(LinkedList)
 
-# Add the static library
-add_subdirectory(linkedlist)
-
 # Add the tests dir
 add_subdirectory(tests)

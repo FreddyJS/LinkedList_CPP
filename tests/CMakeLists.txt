@@ -12,14 +12,15 @@ FetchContent_MakeAvailable(googletest)
 # Enable testing and set tests
 enable_testing()
 
-add_executable(
-  hello_test
-  hello_test.cpp
-)
-target_link_libraries(
-  hello_test
-  gtest_main
+include_directories(${CMAKE_SOURCE_DIR}/linkedlist)
+
+set(TEST_SOURCES 
+  main.cpp
+  integer_list.cpp
 )
 
+add_executable(list_tests ${TEST_SOURCES})
+target_link_libraries(list_tests gtest_main)
+
 include(GoogleTest)
-gtest_discover_tests(hello_test)
+gtest_discover_tests(list_tests)
