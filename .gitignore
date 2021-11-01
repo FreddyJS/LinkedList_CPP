@@ -1,10 +1,5 @@
-
+# Ignore vscode settings
 .vscode/
 
-bin/
-
-obj/
-
-cobertura.xml
-
-debug.sh
+# Ignore cmake build dir
+build

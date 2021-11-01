@@ -1,3 +1,5 @@
+#include <LinkedList.hpp>
+
 // Returns the pointer to the LinkedListItem
 // Returns a null pointer if the item on the position requested not exists
 // \@index: number of the position of the desired item

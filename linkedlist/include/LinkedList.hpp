@@ -6,11 +6,11 @@
 #include <exception>
 
 // Include the Item class, those will be the nodes that stores the data
-#include <LinkedList/LinkedListItem.hpp>
+#include <LinkedListItem.hpp>
 // Include the Iterator class for the LinkedList, it allows to use for_range loops with the list
-#include <LinkedList/LinkedListIterator.hpp>
+#include <LinkedListIterator.hpp>
 // Include the Exception class for the LinkedList, it allows to use custom exception messages
-#include <LinkedList/LinkedListException.hpp>
+#include <LinkedListException.hpp>
 
 // LinkedList class, doubly linked list implementation
 // If you use static allocation please be sure to return the list if its modified
@@ -74,6 +74,6 @@ class LinkedList{
 };
 
 // Include all the definitions of the functions for the LinkedList class
-#include <LinkedList/LinkedList.cpp>
+// #include <LinkedList/LinkedList.cpp>
 
 #endif
