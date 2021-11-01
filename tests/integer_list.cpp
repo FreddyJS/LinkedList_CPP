@@ -27,5 +27,7 @@ TEST_F( IntegerListTests, IntegersCanBeAddedToTheList )
 
 	//then:
 	EXPECT_EQ(integerList.size(), 1);
+	EXPECT_EQ(integerList.get(0), number);
+	EXPECT_EQ(integerList.getFirst(), number);
 	EXPECT_EQ(integerList.getLast(), number);
 }
