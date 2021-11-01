@@ -86,7 +86,7 @@ intList->clear();
 LinkedList<int>* intList = new LinkedList<int>();
 intList->addLast(10);
     
-for (int i = 0; i < intList->size; i++) {
+for (int i = 0; i < intList->size(); i++) {
     cout << "Integer value: " << intList->get(i) << endl;
 }
 

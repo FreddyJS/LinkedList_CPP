@@ -53,6 +53,7 @@ class LinkedList
 
         LinkedListItem<T>* current = NULL;
         size_t index = 0;
+        size_t _size = 0;
 
     public:
         // Empty constructor
@@ -70,8 +71,7 @@ class LinkedList
             clear();
         }
 
-        size_t size = 0;
-
+        size_t size() { return this->_size; }
         void addLast(T data);
         T getFirst();
         T getLast();
@@ -159,7 +159,7 @@ void LinkedList<T>::addLast(T data) {
         this->first = item;
         this->last = item;
 
-        this->size++;
+        this->_size++;
 
     } else {
         item = new LinkedListItem<T>(data);
@@ -167,7 +167,7 @@ void LinkedList<T>::addLast(T data) {
         item->previous = this->last;
 
         this->last = item;
-        this->size++;
+        this->_size++;
 
     }
 }
@@ -303,12 +303,12 @@ void LinkedList<T>::clear() {
     LinkedListItem<T>* p;
     LinkedListItem<T>* paux;
 
-    if (this->size > 0) {
+    if (this->_size > 0) {
         p = this->last;
 
         while ( (paux = p->previous) ) {
             delete p;
-            this->size--;
+            this->_size--;
             p = paux;
 
             this->last = p;
@@ -316,7 +316,7 @@ void LinkedList<T>::clear() {
 
         p = this->first;
         delete p;
-        this->size--;
+        this->_size--;
         
         this->last = NULL;
         this->first = NULL;

@@ -26,6 +26,6 @@ TEST_F( IntegerListTests, IntegersCanBeAddedToTheList )
 	integerList.addLast(number);
 
 	//then:
-	EXPECT_EQ(integerList.size, 1);
+	EXPECT_EQ(integerList.size(), 1);
 	EXPECT_EQ(integerList.getLast(), number);
 }
