@@ -111,12 +111,12 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
         this->index = 0;
     }
 
-    int increment = (this->index - index);
-    if (increment > 0) increment = -1;
-    else increment = 1;
+    int step = (this->index - index);
+    if (step > 0) step = -1;
+    else step = 1;
 
     while (this->index != index) {
-        switch (increment)
+        switch (step)
         {
         case 1:
             this->current = this->current->next;
@@ -131,7 +131,7 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
         }
 
         if (this->current == NULL) break;
-        this->index += increment;
+        this->index += step;
     }
 
     return this->current;
@@ -227,52 +227,34 @@ void LinkedList<T>::set(size_t index, T data){
 // Returns true if success
 template <class T>
 bool LinkedList<T>::remove(size_t index) {
-    LinkedListItem<T>* p = this->getItemPtr(index);
+    LinkedListItem<T>* item = this->getItemPtr(index);
+    if (item == NULL) return false;
 
-    if (p != NULL) {
-        this->current = p->previous;
-
-        if (this->index != 0) {
-            this->index--;
-        }
+    this->current = item->previous;
+    if (this->index != 0) {
+        this->index--;
     }
 
-    if ( p == this->last && this->last != NULL) {
-        if (p != this->first) {
-            (p->previous)->next = NULL;
-            this->last = p->previous;
-        }
-        
-        delete p;
-        this->_size--;
-        
-        return true;
-    } else if ( p == this->first && this->first != NULL) {
-        if (p != this->last) {
-            (p->next)->previous = NULL;
-            this->first = p->next;
-        }
-
-        delete p;
-        this->_size--;
-        
-        return true;
+    if (item == this->first && item == this->last) {
+        this->current = NULL;
+        this->index = 0;
+        this->first = NULL;
+        this->last = NULL;
+    } else if (item == this->last) {
+        this->last = item->previous;
+        (item->previous)->next = NULL;
+    } else if (item == this->first) {
+        this->first = item->next;
+        (item->next)->previous = NULL;
     } else {
-        if ( p == NULL ) {
-            return false;
-        } else {
-            (p->next)->previous = p->previous;
-            (p->previous)->next = p->next;
-
-            delete p;
-            this->_size--;
-
-            return true;
-        }
+        (item->next)->previous = item->previous;
+        (item->previous)->next = item->next;
     }
+    
+    this->_size--;
+    delete item;
 
-    return false;
-
+    return true;
 }
 
 
