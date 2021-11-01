@@ -152,24 +152,17 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
 // \@data: the data to store
 template <class T>
 void LinkedList<T>::addLast(T data) {
-    LinkedListItem<T>* item;
-    if ( this->first == NULL && this->last == NULL ) {
-        item = new LinkedListItem<T>(data);
-        item->setData(data);
+    LinkedListItem<T>* item = new LinkedListItem<T>(data);
+
+    if ( this->_size == 0 ) {
         this->first = item;
-        this->last = item;
-
-        this->_size++;
-
     } else {
-        item = new LinkedListItem<T>(data);
         (this->last)->next = item;
         item->previous = this->last;
-
-        this->last = item;
-        this->_size++;
-
     }
+    
+    this->last = item;
+    this->_size++;
 }
 
 // Returns the first item of the list
