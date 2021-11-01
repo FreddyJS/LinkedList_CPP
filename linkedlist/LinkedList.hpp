@@ -104,47 +104,37 @@ class LinkedList
 // Implements a current pointer to improve the time of the searchs
 template <class T>
 LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
-    if (this->first == NULL) return NULL;
-
-    LinkedListItem<T>* p = this->current;
-    LinkedListItem<T>* paux = NULL;
-    size_t n = this->index;
-
-    if (p == NULL) {
-        p = this->first;
-        n = 0;
+    if (this->first == NULL || index >= this->_size) return NULL;
+    
+    if (this->current == NULL) {
+        this->current = this->first;
+        this->index = 0;
     }
 
-    if (n == index) {
-        this->current = p;
-        this->index = n;
-        return p;
-    }
+    int increment = (this->index - index);
+    if (increment > 0) increment = -1;
+    else increment = 1;
 
-    if (n < index) {
-        while ( (paux = p->next) ) {
-            n++;
-            p = paux;
-            if (n == index) {
-                this->current = p;
-                this->index = n;
-                return p;
-            }
+    while (this->index != index) {
+        switch (increment)
+        {
+        case 1:
+            this->current = this->current->next;
+            break;
+
+        case -1:
+            this->current = this->current->previous;
+            break;
+
+        default:
+            break;
         }
 
-    } else {
-        while ( (paux = p->previous) ) {
-            n--;
-            p = paux;
-            if (n == index) {
-                this->current = p;
-                this->index = n;
-                return p;
-            }
-        }
+        if (this->current == NULL) break;
+        this->index += increment;
     }
 
-    return NULL;
+    return this->current;
 }
 
 
@@ -170,11 +160,10 @@ void LinkedList<T>::addLast(T data) {
 // Throws exception if the list is empty
 template <class T>
 T LinkedList<T>::getFirst() {
-    if (this->first != NULL) {
-        T data = this->first->getData();
-        return data;
+    if (this->_size != 0) {
+        return this->first->getData();
     } else {
-        std::string msg = "LinkedListException: Item not found! Operation: getLast()";
+        std::string msg = "LinkedListException: Item not found! Operation: getFirst()";
         throw LinkedListException(msg);
     }
 }
@@ -185,8 +174,7 @@ T LinkedList<T>::getFirst() {
 template <class T>
 T LinkedList<T>::getLast() {
     if (this->last != NULL) {
-        T data = this->last->getData();
-        return data;
+        return this->last->getData();
     } else {
         std::string msg = "LinkedListException: Item not found! Operation: getLast()";
         throw LinkedListException(msg);
