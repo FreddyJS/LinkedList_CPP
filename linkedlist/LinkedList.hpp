@@ -263,7 +263,7 @@ bool LinkedList<T>::remove(size_t index) {
         }
         
         delete p;
-        this->size--;
+        this->_size--;
         
         return true;
     } else if ( p == this->first && this->first != NULL) {
@@ -273,7 +273,7 @@ bool LinkedList<T>::remove(size_t index) {
         }
 
         delete p;
-        this->size--;
+        this->_size--;
         
         return true;
     } else {
@@ -284,7 +284,7 @@ bool LinkedList<T>::remove(size_t index) {
             (p->previous)->next = p->next;
 
             delete p;
-            this->size--;
+            this->_size--;
 
             return true;
         }
@@ -331,7 +331,7 @@ void LinkedList<T>::clear() {
 // Returns true if success
 template <class T>
 bool LinkedList<T>::shiftr() {
-    if (this->size >= 2) {
+    if (this->_size >= 2) {
         LinkedListItem<T>* pfirst = this->first;
         LinkedListItem<T>* plast = this->last;
 
@@ -344,7 +344,7 @@ bool LinkedList<T>::shiftr() {
         pfirst->previous = plast;
 
         if (this->current != NULL) {
-            if (this->index == this->size-1) {
+            if (this->index == this->_size-1) {
                 this->index = 0;
             } else {
                 this->index++;
@@ -380,7 +380,7 @@ bool LinkedList<T>::shiftr(size_t shifts) {
 // Returns true if success
 template <class T>
 bool LinkedList<T>::shiftl() {
-    if (this->size >= 2) {
+    if (this->_size >= 2) {
         LinkedListItem<T>* pfirst = this->first;
         LinkedListItem<T>* plast = this->last;
 
@@ -395,7 +395,7 @@ bool LinkedList<T>::shiftl() {
 
         if (this->current != NULL) {
             if (this->index == 0) {
-                this->index = this->size-1;
+                this->index = this->_size-1;
             } else {
                 this->index--;
             }
