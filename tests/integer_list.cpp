@@ -48,3 +48,27 @@ TEST_F( IntegerListTests, IntegersCanBeRemovedFromTheList )
 	EXPECT_EQ(integerList.getFirst(), number);
 	EXPECT_EQ(integerList.getLast(), number);
 }
+
+TEST_F( IntegerListTests, ListCanBeIteratedToRetrieveEveryElement )
+{
+	//given:
+	int first = 32;
+	int last = 40;
+	
+	//when:
+	for (int i = first; i <= last; i++)
+	{
+		integerList.addLast(i);
+	}
+
+	//then:
+	EXPECT_EQ(integerList.size(), 9);
+	EXPECT_EQ(integerList.get(0), first);
+	EXPECT_EQ(integerList.getFirst(), first);
+	EXPECT_EQ(integerList.getLast(), last);
+
+	for (int i = first; i <= last; i++)
+	{
+		EXPECT_EQ(integerList.get(i - first), i);
+	}
+}
