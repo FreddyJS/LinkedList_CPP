@@ -4,17 +4,16 @@ set(CMAKE_CXX_STANDARD 11)
 # Set the project name
 project(LinkedList)
 
-# Get the Google Test Lib
-include(FetchContent)
-FetchContent_Declare(
-  googletest
-  URL https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip
-)
-# For Windows: Prevent overriding the parent project's compiler/linker settings
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
-FetchContent_MakeAvailable(googletest)
+# Declarate our header only library
+add_library(linkedlist INTERFACE)
+target_include_directories(linkedlist INTERFACE linkedlist/)
+
 
 # Add the tests dir
-include_directories(linkedlist)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
+    include(CTest)
+endif()
 
-add_subdirectory(tests)
+if(CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME AND BUILD_TESTING)
+  add_subdirectory(tests)
+endif()
