@@ -56,17 +56,22 @@ class LinkedList
         size_t _size = 0;
 
     public:
-        // Empty constructor
-        LinkedList() {  }
+        // Default constructor, creates an empty list
+        LinkedList() = default;
 
-        // Copy constructor from another list of the same type of data
+        // Copy constructor (deep copy), creates a new list with the same data as the given list
         LinkedList(LinkedList<T>* list) {
+            this->clear();
             this->copyLinkedList(list);
-
-            this->current = NULL;
-            this->index = 0;
         }
-        
+
+        // Copy constructor (deep copy), creates a new list with the same data as the given list
+        LinkedList(LinkedList<T>& list) {
+            this->clear();
+            this->copyLinkedList(&list);
+        }
+
+        // Destructor, deletes all the items in the list
         ~LinkedList() { 
             clear();
         }
@@ -93,6 +98,7 @@ class LinkedList
 
         void* operator new(size_t size);
         void operator delete(void* list);
+        LinkedList<T>& operator =(const LinkedList<T>& list);
 };
 
 // ------ Linked List Methods Implementations ------ //
@@ -395,7 +401,7 @@ bool LinkedList<T>::shiftl(size_t shifts) {
 // Allocates new memory for every item on the new list
 template <class T>
 void LinkedList<T>::copyLinkedList(LinkedList<T>* list) {
-    for (size_t i = 0; i < list->size; i++) {
+    for (size_t i = 0; i < list->size(); i++) {
         this->addLast(list->get(i));
     }    
 }
@@ -414,5 +420,14 @@ void LinkedList<T>::operator delete(void* ptr) {
     free(ptr);
 }
 
+template <class T>
+LinkedList<T>& LinkedList<T>::operator =(const LinkedList<T>& list) {
+    if (this != &list) {
+        this->clear();
+        this->copyLinkedList((LinkedList<T>*) &list);
+    }
+
+    return *this;
+}
 
 #endif
