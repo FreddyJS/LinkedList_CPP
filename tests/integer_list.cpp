@@ -17,7 +17,7 @@ public:
 
 };
 
-TEST_F( IntegerListTests, IntegersCanBeAddedToTheList )
+TEST_F(IntegerListTests, IntegersCanBeAddedToTheList)
 {
 	//given:
 	int number = 32;
@@ -32,7 +32,7 @@ TEST_F( IntegerListTests, IntegersCanBeAddedToTheList )
 	EXPECT_EQ(integerList.getLast(), number);
 }
 
-TEST_F( IntegerListTests, IntegersCanBeRemovedFromTheList )
+TEST_F(IntegerListTests, IntegersCanBeRemovedFromTheList)
 {
 	//given:
 	int number = 32;
@@ -49,7 +49,7 @@ TEST_F( IntegerListTests, IntegersCanBeRemovedFromTheList )
 	EXPECT_EQ(integerList.getLast(), number);
 }
 
-TEST_F( IntegerListTests, ListCanBeIteratedToRetrieveEveryElement )
+TEST_F(IntegerListTests, ListCanBeIteratedToRetrieveEveryElement)
 {
 	//given:
 	int first = 32;
@@ -71,4 +71,37 @@ TEST_F( IntegerListTests, ListCanBeIteratedToRetrieveEveryElement )
 	{
 		EXPECT_EQ(integerList.get(i - first), i);
 	}
+}
+
+TEST_F(IntegerListTests, IntegerListCanBeCleared)
+{
+	//given:
+	integerList.addLast(32);
+	integerList.addLast(40);
+
+	//when:
+	integerList.clear();
+
+	//then:
+	EXPECT_EQ(integerList.size(), 0);
+}
+
+TEST_F(IntegerListTests, IntegerListCanBeDeepCopied)
+{
+	//given:
+	integerList.addLast(32);
+	integerList.addLast(40);
+
+	//when:
+	LinkedList<int> copy = integerList;
+	LinkedList<int> copy2; copy2 = integerList;
+
+	//then:
+	EXPECT_EQ(integerList.size(), copy.size());
+	EXPECT_EQ(integerList.get(0), copy.get(0));
+	EXPECT_EQ(integerList.get(1), copy.get(1));
+
+	EXPECT_EQ(integerList.size(), copy2.size());
+	EXPECT_EQ(integerList.get(0), copy2.get(0));
+	EXPECT_EQ(integerList.get(1), copy2.get(1));
 }
