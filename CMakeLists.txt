@@ -7,7 +7,7 @@ project(LinkedListLib)
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN_GENERATE_HTML YES)
-  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/docs)
+  set(DOXYGEN_HTML_OUTPUT ${CMAKE_SOURCE_DIR}/docs)
 
   doxygen_add_docs(
     doxygen
