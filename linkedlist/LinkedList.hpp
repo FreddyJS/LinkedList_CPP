@@ -110,7 +110,6 @@ class LinkedList
         LinkedListIterator<T> begin() { return LinkedListIterator<T>(first); }
         LinkedListIterator<T> end() { return NULL; }
 
-        void* operator new(size_t size);
         void operator delete(void* list);
         LinkedList<T>& operator =(const LinkedList<T>& list);
 };
