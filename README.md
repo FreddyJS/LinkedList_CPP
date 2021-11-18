@@ -2,7 +2,9 @@
 C ++ library that provides all the necessary methods to handle a list of any type of data. It is implemented by two classes, the "manager" class (LinkedList) and the node class (LinkedListItem).
 
 When passed a list by value it will be `deep copied` so the original list will not be modified. In order to save the changes to the list you will have to return the modified list.  
-The copy method is just clear the whole list and then add each element to it. Allocating space for each one.  
+The copy method just clears the whole list and then add each element to it. Allocating space for each one.  
+
+For more documentation you can take a look to [LinkedList Docs](https://freddyjs.github.io/LinkedList_CPP/)  
 
 ## LinkedList Class
 ```c++
