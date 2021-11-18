@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8)
+cmake_minimum_required(VERSION 3.9)
 set(CMAKE_CXX_STANDARD 11)
 
 # Set the project name
@@ -8,13 +8,19 @@ find_package(Doxygen)
 if(DOXYGEN_FOUND)
   set(DOXYGEN_GENERATE_HTML YES)
   set(DOXYGEN_HTML_OUTPUT ${CMAKE_SOURCE_DIR}/docs)
+  set(DOXYGEN_USE_MDFILE_AS_MAINPAGE ${CMAKE_SOURCE_DIR}/README.md)
+  set(DOXYGEN_EXCLUDE_PATTERNS 
+    */build/*
+    */tests/*
+    */docs/*
+  )
 
   doxygen_add_docs(
     doxygen
-    linkedlist
+    ${CMAKE_SOURCE_DIR}
     COMMENT "Generating doc pages"
   )
-endif()
+endif(DOXYGEN_FOUND)
 
 # Declarate our header only library
 add_library(linkedlist INTERFACE)

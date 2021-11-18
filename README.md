@@ -114,7 +114,7 @@ intList->addLast(10);
 delete(intList);
 ```
 ## More operations
-- ###  Cyclic Shift
+###  Cyclic Shift
 ```c++
 LinkedList<int>* intList = new LinkedList<int>();
 intList->addLast(23);
