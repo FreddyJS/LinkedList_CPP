@@ -1,3 +1,11 @@
+/**
+ * @file LinkedList.hpp
+ * @author FreddyJS
+ * @brief LinkedList class header file
+ * @version 0.1
+ * @date 2021-11-18
+ */
+
 #ifndef _LinkedList_H
 #define _LinkedList_H
 
@@ -5,9 +13,12 @@
 #include <iostream>
 #include <exception>
 
-// Include the Item class, those will be the nodes that stores the data
 #include <LinkedListItem.hpp>
 
+/**
+ * @brief Custom exception class. Used to throw exceptions.
+ *  
+ */
 class LinkedListException: public std::exception
 {
     private:
@@ -19,12 +30,16 @@ class LinkedListException: public std::exception
         }   
 };
 
-// Iterator class for the LinkedList
+/**
+ * @brief Iterator class for LinkedList.
+ * 
+ * @tparam T Type of the elements in the list.
+ */
 template <class T>
 class LinkedListIterator
 {
     public:
-        LinkedListItem<T>* p;
+        LinkedListItem<T>* p; /**< Pointer to the current item */
         LinkedListIterator(LinkedListItem<T>* p) : p(p) {}
         ~LinkedListIterator() { }
 
@@ -33,12 +48,11 @@ class LinkedListIterator
         void operator++() {p = p->next;}
 };
 
-// LinkedList class, doubly linked list implementation
-// If you use static allocation please be sure to return the list if its modified
-// \@type: the type of the data to store
-//
-// LinkedList<type> list;
-// LinkedList<type>* list = new LinkedList<int>();
+/**
+ * @brief Doubly linked list implementation.
+ * 
+ * @tparam T Type of the elements in the list.
+ */
 template <class T>
 class LinkedList
 {
@@ -101,13 +115,13 @@ class LinkedList
         LinkedList<T>& operator =(const LinkedList<T>& list);
 };
 
-// ------ Linked List Methods Implementations ------ //
-
-// Returns the pointer to the LinkedListItem
-// Returns a null pointer if the item on the position requested not exists
-// \@index: number of the position of the desired item
-//
-// Implements a current pointer to improve the time of the searchs
+/**
+ * @brief Returns the pointer to the LinkedListItem
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param index number of the position of the desired item
+ * @return LinkedListItem<T>* pointer to the desired item
+ */
 template <class T>
 LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
     if (this->first == NULL || index >= this->_size) return NULL;
@@ -143,9 +157,12 @@ LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
     return this->current;
 }
 
-
-// Adds an item to the back of the list
-// \@data: the data to store
+/**
+ * @brief Adds an item to the back of the list
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param data data to be added to the list
+ */
 template <class T>
 void LinkedList<T>::addLast(T data) {
     LinkedListItem<T>* item = new LinkedListItem<T>(data);
@@ -161,9 +178,12 @@ void LinkedList<T>::addLast(T data) {
     this->_size++;
 }
 
-// Returns the first item of the list
-//
-// Throws exception if the list is empty
+/**
+ * @brief Returns the first item in the list
+ * 
+ * @tparam T Type of the elements in the list.
+ * @return T data of the first item
+ */
 template <class T>
 T LinkedList<T>::getFirst() {
     if (this->_size != 0) {
@@ -174,9 +194,12 @@ T LinkedList<T>::getFirst() {
     }
 }
 
-// Returns the last item of the list
-//
-// Throws exception if the list is empty
+/**
+ * @brief Returns the last item in the list
+ * 
+ * @tparam T Type of the elements in the list.
+ * @return T data of the last item
+ */
 template <class T>
 T LinkedList<T>::getLast() {
     if (this->last != NULL) {
@@ -188,11 +211,13 @@ T LinkedList<T>::getLast() {
 }
 
 
-// Returns the requested item on the position [index]
-// Range [0, list.size-1] if the list is not empty
-// \@index: number of the position of the desired item
-//
-// Throws exception if the item not exists
+/**
+ * @brief Returns the item in the list at the given index
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param index number of the position of the desired item
+ * @return T data of the desired item
+ */
 template <class T>
 T LinkedList<T>::get(size_t index){
     LinkedListItem<T>* p = this->getItemPtr(index);
@@ -206,13 +231,13 @@ T LinkedList<T>::get(size_t index){
 
 }
 
-// Replaces the data of the item on the position [index]
-// Range [0, list.size-1] if the list is not empty
-//
-// \@index: number of the position of the item to change
-// \@data: the data to store
-//
-// Throws exception if the item not exists
+/**
+ * @brief Sets the item in the list at the given index
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param index number of the position of the desired item
+ * @param data data to replace the old data
+ */
 template <class T>
 void LinkedList<T>::set(size_t index, T data){
     LinkedListItem<T>* p = this->getItemPtr(index);
@@ -226,11 +251,13 @@ void LinkedList<T>::set(size_t index, T data){
 
 }
 
-
-// Remove the item on the position [index] if exists
-// \@index: number of the position of the item to remove
-//
-// Returns true if success
+/**
+ * @brief Removes the item in the list at the given index
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param index number of the position of the desired item
+ * @return true if the item was removed, false if the item was not found
+ */
 template <class T>
 bool LinkedList<T>::remove(size_t index) {
     LinkedListItem<T>* item = this->getItemPtr(index);
@@ -263,10 +290,11 @@ bool LinkedList<T>::remove(size_t index) {
     return true;
 }
 
-
-// Clears the list by calling the destructor of any Item stored
-//
-// Automatic called when the list is destroyed
+/**
+ * @brief Clears the list removing all items from it
+ * 
+ * @tparam T Type of the elements in the list.
+ */
 template <class T>
 void LinkedList<T>::clear() {
     LinkedListItem<T>* p;
@@ -295,9 +323,12 @@ void LinkedList<T>::clear() {
     }
 }
 
-// Shifts the items of the list to the right one position
-// Cyclic Shift Right
-// Returns true if success
+/**
+ * @brief Shifts the items of the list to the right one position
+ * 
+ * @tparam T Type of the elements in the list.
+ * @return true if success
+ */
 template <class T>
 bool LinkedList<T>::shiftr() {
     if (this->_size >= 2) {
@@ -327,13 +358,13 @@ bool LinkedList<T>::shiftr() {
     return false;
 }
 
-
-
-// Shifts the items of the list to the right N times
-// Cyclic Shift Right
-// \@shifts: the number of shifts to do
-//
-// Returns true if success
+/**
+ * @brief Shifts the items of the list to the right N times
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param shifts number of shifts to do
+ * @return true if success
+ */
 template <class T>
 bool LinkedList<T>::shiftr(size_t shifts) {
     for (size_t i = 0; i < shifts; i++) {
@@ -344,9 +375,12 @@ bool LinkedList<T>::shiftr(size_t shifts) {
     return true;
 }
 
-// Shifts the items of the list to the left one position
-// Cyclic Shift Left
-// Returns true if success
+/**
+ * @brief Shifts the items of the list to the left one position
+ * 
+ * @tparam T Type of the elements in the list.
+ * @return true if success
+ */
 template <class T>
 bool LinkedList<T>::shiftl() {
     if (this->_size >= 2) {
@@ -377,13 +411,13 @@ bool LinkedList<T>::shiftl() {
     return false;
 }
 
-
-
-// Shifts the items of the list to the left one position
-// Cyclic Shift Left
-// \@shifts: the number of shifts to do
-//
-// Returns true if success
+/**
+ * @brief Shifts the items of the list to the left N times
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param shifts number of shifts to do
+ * @return true if success
+ */
 template <class T>
 bool LinkedList<T>::shiftl(size_t shifts) {
     for (size_t i = 0; i < shifts; i++) {
@@ -394,11 +428,12 @@ bool LinkedList<T>::shiftl(size_t shifts) {
     return true;
 }
 
-// Copy all the items from one list to the new list
-// Used on the copy constructor
-// \@list: LinkedList pointer to the list to copy
-//
-// Allocates new memory for every item on the new list
+/**
+ * @brief Copy all the items of the list to the self list
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param list LinkedList pointer to the list to copy
+ */
 template <class T>
 void LinkedList<T>::copyLinkedList(LinkedList<T>* list) {
     for (size_t i = 0; i < list->size(); i++) {
@@ -406,13 +441,12 @@ void LinkedList<T>::copyLinkedList(LinkedList<T>* list) {
     }    
 }
 
-// Overloading operator new
-template <class T>
-void* LinkedList<T>::operator new(size_t size) {
-    return malloc(size);
-}
-
-// Overloading operator delete
+/**
+ * @brief Overload of the operator delete. Clears the list and frees the memory
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param ptr pointer to the list to delete
+ */
 template <class T>
 void LinkedList<T>::operator delete(void* ptr) {
     LinkedList<T>* list = (LinkedList<T>*) ptr;
@@ -420,6 +454,13 @@ void LinkedList<T>::operator delete(void* ptr) {
     free(ptr);
 }
 
+/**
+ * @brief Overload of the operator =. Makes a deep copy of the list
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param list LinkedList pointer to the list to copy
+ * @return LinkedList<T>& reference to the list
+ */
 template <class T>
 LinkedList<T>& LinkedList<T>::operator =(const LinkedList<T>& list) {
     if (this != &list) {

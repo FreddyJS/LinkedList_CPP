@@ -4,6 +4,18 @@ set(CMAKE_CXX_STANDARD 11)
 # Set the project name
 project(LinkedListLib)
 
+find_package(Doxygen)
+if(DOXYGEN_FOUND)
+  set(DOXYGEN_GENERATE_HTML YES)
+  set(DOXYGEN_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/docs)
+
+  doxygen_add_docs(
+    doxygen
+    linkedlist
+    COMMENT "Generating doc pages"
+  )
+endif()
+
 # Declarate our header only library
 add_library(linkedlist INTERFACE)
 target_include_directories(linkedlist INTERFACE linkedlist/)
