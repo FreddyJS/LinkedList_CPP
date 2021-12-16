@@ -172,12 +172,52 @@ class LinkedList
         bool shiftl();
         bool shiftl(size_t shifts);
 
+        void chopLeft(size_t index);
+        void chopRight(size_t index);
+
         LinkedListIterator<T> begin() { return LinkedListIterator<T>(first); }
         LinkedListIterator<T> end() { return NULL; }
 
         void operator delete(void* list);
         LinkedList<T>& operator =(const LinkedList<T>& list);
 };
+
+
+/**
+ * @brief Removes the elements from the beginning of the list until the given index (exclusive).
+ * 
+ * @tparam T 
+ * @param index Index of the new first element.
+ */
+template <class T>
+void LinkedList<T>::chopLeft(size_t index) {
+    if (index > this->_size) {
+        throw LinkedListException("Index out of bounds.");
+    }
+
+    LinkedListItem<T>* newFirstItem = this->getItemPtr(index);
+    do {
+        this->remove(0);
+    } while (this->first != newFirstItem);
+}
+
+/**
+ * @brief Removes the elements from the end of the list until the given index (exclusive).
+ * 
+ * @tparam T 
+ * @param index Index of the new last element.
+ */
+template <class T>
+void LinkedList<T>::chopRight(size_t index) {
+    if (index > this->_size) {
+        throw LinkedListException("Index out of bounds.");
+    }
+
+    LinkedListItem<T>* newLastItem = this->getItemPtr(index);
+    do {
+        this->remove(this->_size - 1);
+    } while (this->last != newLastItem); // Stop if the last item is the one at the given index
+}
 
 /**
  * @brief Returns the pointer to the LinkedListItem
