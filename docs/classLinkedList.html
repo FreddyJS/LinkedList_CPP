@@ -118,6 +118,12 @@ size_t&#160;</td><td class="memItemRight" valign="bottom"><b>size</b> ()</td></t
 <tr class="memitem:a63564d789061a27f0ca6875a24508ac4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedList.html#a63564d789061a27f0ca6875a24508ac4">shiftl</a> (size_t shifts)</td></tr>
 <tr class="memdesc:a63564d789061a27f0ca6875a24508ac4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shifts the items of the list to the left N times.  <a href="classLinkedList.html#a63564d789061a27f0ca6875a24508ac4">More...</a><br /></td></tr>
 <tr class="separator:a63564d789061a27f0ca6875a24508ac4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00578c8567df1c8b58796c7bfd5c669f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedList.html#a00578c8567df1c8b58796c7bfd5c669f">chopLeft</a> (size_t index)</td></tr>
+<tr class="memdesc:a00578c8567df1c8b58796c7bfd5c669f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the elements from the beginning of the list until the given index (exclusive).  <a href="classLinkedList.html#a00578c8567df1c8b58796c7bfd5c669f">More...</a><br /></td></tr>
+<tr class="separator:a00578c8567df1c8b58796c7bfd5c669f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaac0eb2215fbf1feeeb37d0d416540b6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedList.html#aaac0eb2215fbf1feeeb37d0d416540b6">chopRight</a> (size_t index)</td></tr>
+<tr class="memdesc:aaac0eb2215fbf1feeeb37d0d416540b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the elements from the end of the list until the given index (exclusive).  <a href="classLinkedList.html#aaac0eb2215fbf1feeeb37d0d416540b6">More...</a><br /></td></tr>
+<tr class="separator:aaac0eb2215fbf1feeeb37d0d416540b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbf4e0ecef463833b96acaea9ecfee01"><td class="memItemLeft" align="right" valign="top"><a id="adbf4e0ecef463833b96acaea9ecfee01"></a>
 <a class="el" href="classLinkedListIterator.html">LinkedListIterator</a>&lt; T &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>begin</b> ()</td></tr>
 <tr class="separator:adbf4e0ecef463833b96acaea9ecfee01"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -171,6 +177,74 @@ template&lt;class T &gt; </div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">data</td><td>data to be added to the list </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a00578c8567df1c8b58796c7bfd5c669f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00578c8567df1c8b58796c7bfd5c669f">&#9670;&nbsp;</a></span>chopLeft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classLinkedList.html">LinkedList</a>&lt; T &gt;::chopLeft </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes the elements from the beginning of the list until the given index (exclusive). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Index of the new first element. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaac0eb2215fbf1feeeb37d0d416540b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaac0eb2215fbf1feeeb37d0d416540b6">&#9670;&nbsp;</a></span>chopRight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class T &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classLinkedList.html">LinkedList</a>&lt; T &gt;::chopRight </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Removes the elements from the end of the list until the given index (exclusive). </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>Index of the new last element. </td></tr>
   </table>
   </dd>
 </dl>
