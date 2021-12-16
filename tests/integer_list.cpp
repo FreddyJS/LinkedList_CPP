@@ -165,3 +165,37 @@ TEST_F(IntegerListTests, IntegerListShiftLeftTest)
 	EXPECT_EQ(integerList.get(6), 40);
 	EXPECT_EQ(integerList.get(7), 50);
 }
+
+TEST_F(IntegerListTests, IntegerListChopLeft)
+{
+	//given:
+	integerList.addLast(32);
+	integerList.addLast(40);
+	integerList.addLast(50);
+	integerList.addLast(60);
+
+	//when:
+	integerList.chopLeft(2);
+
+	//then:
+	EXPECT_EQ(integerList.size(), 2);
+	EXPECT_EQ(integerList.get(0), 50);
+	EXPECT_EQ(integerList.get(1), 60);
+}
+
+TEST_F(IntegerListTests, IntegerListChopRight)
+{
+	//given:
+	integerList.addLast(32);
+	integerList.addLast(40);
+	integerList.addLast(50);
+	integerList.addLast(60);
+
+	//when:
+	integerList.chopRight(1);
+
+	//then:
+	EXPECT_EQ(integerList.size(), 2);
+	EXPECT_EQ(integerList.get(0), 32);
+	EXPECT_EQ(integerList.get(1), 40);
+}
