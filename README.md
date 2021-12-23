@@ -1,5 +1,5 @@
 # DoublyLinkedList for C++
-[![Build and test](https://github.com/FreddyJS/LinkedList_CPP/actions/workflows/cmake.yml/badge.svg)](https://github.com/FreddyJS/LinkedList_CPP/actions/workflows/cmake.yml)
+[![Build and test](https://github.com/FreddyJS/LinkedList_CPP/actions/workflows/matrix.yml/badge.svg)](https://github.com/FreddyJS/LinkedList_CPP/actions/workflows/matrix.yml)
 [![Lines Of Code](https://img.shields.io/tokei/lines/github/FreddyJS/LinkedList_CPP?label=Total%20lines)](https://github.com/FreddyJS/LinkedList_CPP)  
 
 C ++ library that provides all the necessary methods to handle a list of any type of data. It is implemented by two classes, the "manager" class (LinkedList) and the node class (LinkedListItem).
