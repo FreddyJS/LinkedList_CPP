@@ -1,5 +1,5 @@
 /**
- * @file LinkedList.hpp
+ * @file linkedlist.hpp
  * @author FreddyJS
  * @brief LinkedList class header file
  * @version 0.1
@@ -140,19 +140,17 @@ class LinkedList
 
         // Copy constructor (deep copy), creates a new list with the same data as the given list
         LinkedList(LinkedList<T>* list) {
-            this->clear();
             this->copyLinkedList(list);
         }
 
         // Copy constructor (deep copy), creates a new list with the same data as the given list
         LinkedList(LinkedList<T>& list) {
-            this->clear();
             this->copyLinkedList(&list);
         }
 
         // Destructor, deletes all the items in the list
         ~LinkedList() { 
-            clear();
+            this->clear();
         }
 
         size_t size() { return this->_size; }

@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include <LinkedList.hpp>
+#include <linkedlist.hpp>
 
 class IntegerListTests : public testing::Test
 {
