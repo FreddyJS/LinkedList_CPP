@@ -1,4 +1,4 @@
-name: CMake
+name: Matrix
 
 on:
   push:
@@ -20,7 +20,7 @@ jobs:
     runs-on: ${{ config.os }}
 
     strategy:
-      config: [
+      config:
         - {
             os: windows-latest
           }
@@ -30,7 +30,6 @@ jobs:
         - {
             os: macos-latest
           }
-      ]
 
     steps:
     - uses: actions/checkout@v2
