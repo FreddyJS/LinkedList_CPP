@@ -44,4 +44,4 @@ jobs:
     
     - name: Check Memory Leaks
       working-directory: ${{github.workspace}}/build/tests
-      run: valgrind ./list_tests
+      run: valgrind ./list_tests && exit $? # Using the exit code to fail the action so this step needs to be the last
