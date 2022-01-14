@@ -8,7 +8,10 @@ on:
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
-  BUILD_TYPE: Release
+  # For some reason in Release mode if you allocate memory in a method and return the pointer
+  # The memory will be freed at the end of the program so if we free it our selfs we get a double free error
+  # So lets use the Debug mode in here
+  BUILD_TYPE: Debug
 
 jobs:
   build:
