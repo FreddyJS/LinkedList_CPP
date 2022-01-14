@@ -68,6 +68,13 @@ TEST_F(IntegerListTests, ListCanBeIteratedToRetrieveEveryElement)
 		EXPECT_EQ(integerList.get(i - first), i);
 	}
 
+	int expected = first;
+	for (int i: integerList)
+	{
+		EXPECT_EQ(i, expected);
+		expected++;
+	}
+
 	EXPECT_EQ(integerList.get(0), first);
 	EXPECT_EQ(integerList.getFirst(), first);
 	EXPECT_EQ(integerList.getLast(), last);
@@ -198,4 +205,37 @@ TEST_F(IntegerListTests, IntegerListChopRight)
 	EXPECT_EQ(integerList.size(), 2);
 	EXPECT_EQ(integerList.get(0), 32);
 	EXPECT_EQ(integerList.get(1), 40);
+}
+
+LinkedList<int> init_list(void)
+{
+	LinkedList<int> list;
+	list.addLast(32);
+	list.addLast(40);
+	return list;
+}
+
+LinkedList<int>* init_list_ptr(void)
+{
+	LinkedList<int>* list = new LinkedList<int>();
+	list->addLast(32);
+	list->addLast(40);
+	return list;
+}
+
+TEST_F(IntegerListTests, IntegerListCanBeReturnedFromMethod)
+{
+	//given:
+	LinkedList<int> list = init_list();
+	LinkedList<int>* list_ptr = init_list_ptr();
+
+	//then:
+	EXPECT_EQ(list.size(), 2);
+	EXPECT_EQ(list.get(0), 32);
+	EXPECT_EQ(list.get(1), 40);
+	EXPECT_EQ(list_ptr->size(), 2);
+	EXPECT_EQ(list_ptr->get(0), 32);
+	EXPECT_EQ(list_ptr->get(1), 40);
+
+	delete list_ptr;
 }
