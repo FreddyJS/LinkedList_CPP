@@ -126,12 +126,10 @@ class LinkedList
     private:
         void copyLinkedList(LinkedList<T>* list);
         
-        LinkedListItem<T>* getItemPtr(size_t index);
+        LinkedListItem<T>* getItemPtr(size_t index) const;
         LinkedListItem<T>* first = NULL;
         LinkedListItem<T>* last = NULL;
 
-        LinkedListItem<T>* current = NULL;
-        size_t index = 0;
         size_t _size = 0;
 
     public:
@@ -148,26 +146,31 @@ class LinkedList
             this->copyLinkedList(&list);
         }
 
+        // Copy constructor (deep copy), creates a new list with the same data as the given list
+        LinkedList(const LinkedList<T>& list) {
+            for (int i = 0; i < list.size(); i++) {
+                this->addLast(list.get(i));
+            }
+        }
+
         // Destructor, deletes all the items in the list
         ~LinkedList() { 
             this->clear();
         }
 
-        size_t size() { return this->_size; }
+        size_t size() const { return this->_size; }
+        T get(size_t index) const;
+        T getFirst() const;
+        T getLast() const;
+
         void addLast(T data);
-        T getFirst();
-        T getLast();
-        T get(size_t index);
-
         void set(size_t index, T data);
-
         bool remove(size_t index);
         void clear();
 
         bool shiftr();
-        bool shiftr(size_t shifts);
-
         bool shiftl();
+        bool shiftr(size_t shifts);
         bool shiftl(size_t shifts);
 
         void chopLeft(size_t index);
@@ -180,6 +183,23 @@ class LinkedList
         LinkedList<T>& operator =(const LinkedList<T>& list);
 };
 
+/**
+ * @brief Returns the pointer to the LinkedListItem
+ * 
+ * @tparam T Type of the elements in the list.
+ * @param index number of the position of the desired item
+ * @return LinkedListItem<T>* pointer to the desired item
+ */
+template <class T>
+LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) const {
+    LinkedListItem<T>* item = this->first;
+    while (index != 0) {
+        item = item->next;
+        index--;
+    }
+
+    return item;
+}
 
 /**
  * @brief Removes the elements from the beginning of the list until the given index (exclusive).
@@ -189,8 +209,9 @@ class LinkedList
  */
 template <class T>
 void LinkedList<T>::chopLeft(size_t index) {
-    if (index > this->_size) {
-        throw LinkedListException("Index out of bounds.");
+    if (index >= this->_size) {
+        std::string msg = "LinkedListException: Index out of bounds. Operation: chopLeft(" + std::to_string(index) + ")";
+        throw LinkedListException(msg);
     }
 
     LinkedListItem<T>* newFirstItem = this->getItemPtr(index);
@@ -207,56 +228,15 @@ void LinkedList<T>::chopLeft(size_t index) {
  */
 template <class T>
 void LinkedList<T>::chopRight(size_t index) {
-    if (index > this->_size) {
-        throw LinkedListException("Index out of bounds.");
+    if (index >= this->_size) {
+        std::string msg = "LinkedListException: Index out of bounds. Operation: chopRight(" + std::to_string(index) + ")";
+        throw LinkedListException(msg);
     }
 
     LinkedListItem<T>* newLastItem = this->getItemPtr(index);
     do {
         this->remove(this->_size - 1);
     } while (this->last != newLastItem); // Stop if the last item is the one at the given index
-}
-
-/**
- * @brief Returns the pointer to the LinkedListItem
- * 
- * @tparam T Type of the elements in the list.
- * @param index number of the position of the desired item
- * @return LinkedListItem<T>* pointer to the desired item
- */
-template <class T>
-LinkedListItem<T>* LinkedList<T>::getItemPtr(size_t index) {
-    if (this->first == NULL || index >= this->_size) return NULL;
-    
-    if (this->current == NULL) {
-        this->current = this->first;
-        this->index = 0;
-    }
-
-    int step = (this->index - index);
-    if (step > 0) step = -1;
-    else step = 1;
-
-    while (this->index != index) {
-        switch (step)
-        {
-        case 1:
-            this->current = this->current->next;
-            break;
-
-        case -1:
-            this->current = this->current->previous;
-            break;
-
-        default:
-            break;
-        }
-
-        if (this->current == NULL) break;
-        this->index += step;
-    }
-
-    return this->current;
 }
 
 /**
@@ -287,13 +267,13 @@ void LinkedList<T>::addLast(T data) {
  * @return T data of the first item
  */
 template <class T>
-T LinkedList<T>::getFirst() {
-    if (this->_size != 0) {
-        return this->first->getData();
-    } else {
-        std::string msg = "LinkedListException: Item not found! Operation: getFirst()";
+T LinkedList<T>::getFirst() const {
+    if (this->_size == 0) {
+        std::string msg = "LinkedListException: List is empty. Operation: getFirst()";
         throw LinkedListException(msg);
     }
+
+    return this->first->getData();
 }
 
 /**
@@ -303,13 +283,13 @@ T LinkedList<T>::getFirst() {
  * @return T data of the last item
  */
 template <class T>
-T LinkedList<T>::getLast() {
-    if (this->last != NULL) {
-        return this->last->getData();
-    } else {
-        std::string msg = "LinkedListException: Item not found! Operation: getLast()";
+T LinkedList<T>::getLast() const {
+    if (this->_size == 0) {
+        std::string msg = "LinkedListException: List is empty. Operation: getLast()";
         throw LinkedListException(msg);
     }
+    
+    return this->last->getData();
 }
 
 
@@ -321,16 +301,13 @@ T LinkedList<T>::getLast() {
  * @return T data of the desired item
  */
 template <class T>
-T LinkedList<T>::get(size_t index){
-    LinkedListItem<T>* p = this->getItemPtr(index);
-
-    if ( p == NULL ) {
-        std::string msg = "LinkedListException: Item not found! Operation: get(" + std::to_string(index) + ")";
+T LinkedList<T>::get(size_t index) const {
+    if (index >= this->_size) {
+        std::string msg = "LinkedListException: Index out of bounds. Operation: get(" + std::to_string(index) + ")";
         throw LinkedListException(msg);
-    } else {
-        return p->getData();
-    }    
+    }
 
+    return this->getItemPtr(index)->getData();
 }
 
 /**
@@ -342,15 +319,13 @@ T LinkedList<T>::get(size_t index){
  */
 template <class T>
 void LinkedList<T>::set(size_t index, T data){
-    LinkedListItem<T>* p = this->getItemPtr(index);
-
-    if ( p == NULL ) {
-        std::string msg = "LinkedListException: Item not found! Operation: set(" + std::to_string(index) +")";
+    if (index >= this->_size) {
+        std::string msg = "LinkedListException: Index out of bounds. Operation: set(" + std::to_string(index) + ")";
         throw LinkedListException(msg);
-    } else {
-        p->setData(data);
-    }    
+    }
 
+    LinkedListItem<T>* p = this->getItemPtr(index);
+    p->setData(data);
 }
 
 /**
@@ -362,17 +337,14 @@ void LinkedList<T>::set(size_t index, T data){
  */
 template <class T>
 bool LinkedList<T>::remove(size_t index) {
-    LinkedListItem<T>* item = this->getItemPtr(index);
-    if (item == NULL) return false;
-
-    this->current = item->previous;
-    if (this->index != 0) {
-        this->index--;
+    if (index >= this->_size) {
+        std::string msg = "LinkedListException: Index out of bounds. Operation: remove(" + std::to_string(index) + ")";
+        throw LinkedListException(msg);
     }
 
+    LinkedListItem<T>* item = this->getItemPtr(index);
+
     if (item == this->first && item == this->last) {
-        this->current = NULL;
-        this->index = 0;
         this->first = NULL;
         this->last = NULL;
     } else if (item == this->last) {
@@ -407,7 +379,6 @@ void LinkedList<T>::clear() {
 
         while ( (paux = p->previous) ) {
             delete p;
-            this->_size--;
             p = paux;
 
             this->last = p;
@@ -415,13 +386,10 @@ void LinkedList<T>::clear() {
 
         p = this->first;
         delete p;
-        this->_size--;
         
         this->last = NULL;
         this->first = NULL;
-        
-        this->current = NULL;
-        this->index = 0;
+        this->_size = 0;
     }
 }
 
@@ -444,15 +412,7 @@ bool LinkedList<T>::shiftr() {
         plast->previous = NULL;
         plast->next = pfirst;
         pfirst->previous = plast;
-
-        if (this->current != NULL) {
-            if (this->index == this->_size-1) {
-                this->index = 0;
-            } else {
-                this->index++;
-            }
-        }
-        
+       
         return true;
     } else {
         return false;
@@ -496,15 +456,6 @@ bool LinkedList<T>::shiftl() {
         plast->next = pfirst;
         pfirst->previous = plast;
         pfirst->next = NULL;
-
-
-        if (this->current != NULL) {
-            if (this->index == 0) {
-                this->index = this->_size-1;
-            } else {
-                this->index--;
-            }
-        }
 
         return true;
     } else {
